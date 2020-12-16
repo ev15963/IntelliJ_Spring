@@ -15,5 +15,4 @@ public interface MemberRepository {
 
     List<Member> findByAll();
 
-    void clearStore();
 }
