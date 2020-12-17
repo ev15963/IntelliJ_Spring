@@ -5,14 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class OracleDBConnector {
-    public static void main(String[] args) {
+
+    private static String dri = "oracle.jdbc.driver.OracleDriver";
+    private static String uri = "jdbc:oracle.thin:@localhost:1521:XE";
+    private static String id = "lsw";
+    private static String pw = "1234";
+
+    public static Connection getConnection() {
+
         Connection conn = null;
-
-        String dri = "oracle.jdbc.driver.oracleDriver";
-        String uri = "jdbc:oracle.thin@localhost:1521:xe";
-        String id = "lsw";
-        String pw = "1234";
-
 
         try {
             Class.forName(dri);
@@ -22,5 +23,13 @@ public class OracleDBConnector {
         } catch (SQLException e) {
             System.err.println("");
         }
+
+        if(conn !=null)
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.err.println("conn err"+e.getMessage());
+            }
+        return conn;
     }
 }

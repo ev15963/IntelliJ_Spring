@@ -1,5 +1,6 @@
 package hello.HelloSpring.repository;
 
+import hello.HelloSpring.OracleDBConnector;
 import hello.HelloSpring.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -25,7 +26,7 @@ public class JdbcMemberRepository implements MemberRepository {
         PreparedStatement pstmt = null;
         ResultSet rs= null;
         try {
-            conn = getConnection();
+            conn = OracleDBConnector.getConnection();
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, member.getName());
             pstmt.executeUpdate();
@@ -54,7 +55,7 @@ public class JdbcMemberRepository implements MemberRepository {
         ResultSet rs = null;
 
         try {
-            conn = getConnection();
+            conn = OracleDBConnector.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,id);
 
@@ -86,7 +87,7 @@ public class JdbcMemberRepository implements MemberRepository {
         ResultSet rs = null;
 
         try {
-            conn = getConnection();
+            conn = OracleDBConnector.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
 
@@ -117,7 +118,7 @@ public class JdbcMemberRepository implements MemberRepository {
         ResultSet rs = null;
 
         try {
-            conn = getConnection();
+            conn = OracleDBConnector.getConnection();
             pstmt = conn.prepareStatement(sql);
 
             rs=pstmt.executeQuery();
@@ -139,12 +140,14 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
-
+    /**
     private Connection getConnection() {
 
 
         return DataSourceUtils.getConnection(dataSource);
     }
+    */
+
 
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
         try {
