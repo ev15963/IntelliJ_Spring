@@ -3,6 +3,7 @@ package hello.HelloSpring;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class OracleDBConnector {
 
@@ -14,14 +15,16 @@ public class OracleDBConnector {
     public static Connection getConnection() {
 
         Connection conn = null;
+        Statement stmt = null;
 
         try {
             Class.forName(dri);
             conn = DriverManager.getConnection(uri, id, pw);
+            stmt = conn.createStatement();
         } catch (ClassNotFoundException e) {
             System.err.println("dirver err : "+e.getMessage());
         } catch (SQLException e) {
-            System.err.println("");
+            System.err.println("sqlErr : "+e.getMessage());
         }
 
         if(conn !=null)
