@@ -5,4 +5,8 @@ create table member_intellij
     name varchar2(255)
 );
 
-insert into member_intellij (id, name) values ('spring', 'spring');
+create sequence seq_id increment by 1 start with 1;
+
+insert into member_intellij values(seq_id.NEXTVAL, 'name');
+
+desc member_intellij
