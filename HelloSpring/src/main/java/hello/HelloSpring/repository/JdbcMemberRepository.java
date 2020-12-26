@@ -22,7 +22,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public Member save(Member member) {
-        String sql = "insert into member_intellij (name) values(?)";
+        String sql = "insert into member_intellij (id, name) values (seq_id.NEXTVAL, ?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -50,7 +50,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findById(Long id) {
-        String sql = "select * from member where id=?";
+        String sql = "select * from member_intellij where id=?";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -82,7 +82,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findByName(String name) {
-        String sql = "select * from member where name =?";
+        String sql = "select * from member_intellij where name =?";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -113,7 +113,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public List<Member> findByAll() {
-        String sql="select * from member";
+        String sql="select * from member_intellij";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
