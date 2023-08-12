@@ -6,3 +6,6 @@ create table member
 );
 
 select * from member;
+
+insert into member(name) values ('spring');
+insert into member(name) values ('spring2');
