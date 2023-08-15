@@ -1,12 +1,14 @@
 package hello.HelloSpring.Service;
 
 import hello.HelloSpring.domain.Member;
+import hello.HelloSpring.repository.MemberRepository;
 import hello.HelloSpring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -18,20 +20,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MemberServiceIntegrationTest {
 
     @Autowired MemberService memberService;
-    @Autowired MemoryMemberRepository memberRepository;
+    @Autowired MemberRepository memberRepository;
 
     @Test
-    void 회원가입() throws Exception{
+    @Commit
+    void 회원가입(){
         //given
         Member member = new Member();
-        member.setName("spring");
+        member.setName("spring108");
 
         //when
         Long saveId = memberService.join(member);
 
         //then
-        Member findMember = memberRepository.findById(saveId).get();
-        assertEquals(member.getName(), findMember.getName());
+        Member findMember = memberService.findOne(saveId).get();
+        assertThat(member.getName()).isEqualTo(findMember.getName());
     }
 
     @Test
