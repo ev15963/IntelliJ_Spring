@@ -15,25 +15,31 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private final DataSource dataSource;
+//    private final DataSource dataSource;
+//
+//    private EntityManager em;
+    private final MemberRepository memberRepository;
 
-    private EntityManager em;
-
-    @Autowired
-    public SpringConfig(DataSource dataSource, EntityManager em) {
-        this.dataSource = dataSource;
-        this.em = em;
+//    @Autowired
+    public SpringConfig(
+//            DataSource dataSource,
+//            EntityManager em,
+            MemberRepository memberRepository
+    ) {
+//        this.dataSource = dataSource;
+//        this.em = em;
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-    //    return new MemoryMemberRepository();
-//        return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
-    }
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+////        return new JdbcMemberRepository(dataSource);
+////        return new JdbcTemplateMemberRepository(dataSource);
+//    }
 }
