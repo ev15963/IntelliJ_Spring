@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
@@ -30,7 +31,7 @@ class MemberServiceIntegrationTest {
 
         //then
         Member findMember = memberRepository.findById(saveId).get();
-        assertEquals(member.getName()), findMember.getName();
+        assertEquals(member.getName(), findMember.getName());
     }
 
     @Test
