@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class TimeTraceAop {
-    @Around("execution(* hello.HelloSpring..*(..))")
+    @Around("execution(* hello.HelloSpring..*(..))&& !target(hello.HelloSpring.SpringConfig)")
     public Object execute (ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         System.out.println("START : "+ joinPoint.toString());
         try {
-            return joinPoint.proceed();
+            return joinPoint.proceed(); // 다음 메서드로 진행
         } finally {
             long finish = System.currentTimeMillis();
             long timeMs = finish - start;
-            System.out.println("END : "+joinPoint.toString()+""+timeMs+"ms");
+            System.out.println("END : "+ joinPoint +""+timeMs+"ms");
         }
     }
 }
